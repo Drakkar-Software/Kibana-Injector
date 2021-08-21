@@ -1,1 +1,1 @@
-# OctoBot-Metrics-Kibana-Injector
+# Kibana-Injector

@@ -23,7 +23,7 @@ jobs:
       - name: Set Environment Variables
         run: |
           OWNER="$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]' | tr -d '-')"
-          IMG=octobot-kibana-injector
+          IMG=kibana-injector
           echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
           echo "IMAGE=${OWNER}/${IMG}" >> $GITHUB_ENV
           echo "LATEST=latest" >> $GITHUB_ENV
