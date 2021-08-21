@@ -1,10 +1,12 @@
 import argparse
+import logging
 
 import injector.config
 import injector.inject_factory as inject_factory
 
 
 def main():
+    logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(description='Inject OctoBot metrics to kibana.')
     parser.add_argument("--mongo-file", help="the exported mongo file", type=argparse.FileType('r'))
     parser.add_argument("--elastic-index", help="the elastic index name", type=str)
