@@ -3,7 +3,7 @@ import abc
 import logging
 from collections import deque
 
-from elasticsearch.helpers import parallel_bulk
+from elasticsearch.helpers import parallel_bulk, bulk
 
 import injector.config
 
@@ -36,3 +36,5 @@ class Injectable(abc.ABC):
     def bulk_inserts(self, actions: list):
         if len(actions) >= 100:
             deque(parallel_bulk(self.config.elastic_search, actions), maxlen=0)
+        else:
+            bulk(self.config.elastic_search, actions)
