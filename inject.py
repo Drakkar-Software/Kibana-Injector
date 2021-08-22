@@ -15,13 +15,15 @@ def main():
     parser.add_argument("--elastic-api-secret", help="the elastic api secret", type=str)
     parser.add_argument("--elastic-index-mapping-file", help="the elastic index mapping file",
                         type=argparse.FileType('r'))
+    parser.add_argument("--elastic-timestamp-field-name", help="the elastic api secret", type=str)
     args = parser.parse_args()
 
     config = injector.config.Config(elastic_index=args.elastic_index,
                                     elastic_host=args.elastic_host,
                                     elastic_api_key=args.elastic_api_key,
                                     elastic_api_secret=args.elastic_api_secret,
-                                    elastic_index_mapping_file=args.elastic_index_mapping_file)
+                                    elastic_index_mapping_file=args.elastic_index_mapping_file,
+                                    elastic_timestamp_field_name=args.elastic_timestamp_field_name)
     injectable_instance = inject_factory.create_injectable_instance(config, args)
     injectable_instance.inject()
 

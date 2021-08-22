@@ -21,7 +21,7 @@ class ExportedMongoFile(injectable.Injectable):
 
     def convert(self, data) -> dict:
         return {
-            key: data[key] if key != "startedAt" else self.convert_time(data[key])
+            key: data[key] if key != self.config.elastic_timestamp_field_name else self.convert_time(data[key])
             for key in data.keys()
         }
 
