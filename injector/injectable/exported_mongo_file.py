@@ -1,13 +1,19 @@
 import json
 import datetime
+from io import StringIO
+
 import pandas as pd
 import injector.injectable.injectable as injectable
 
 
 class ExportedMongoFile(injectable.Injectable):
     def inject_impl(self):
-        self.logger.info(f"Loading mongo file...")
-        data = pd.read_json(self.data_file.read(), lines=True)
+        self.logger.info("Loading mongo file...")
+        try:
+            data = pd.read_json(StringIO(self.data_file.read()), lines=True)  # https://stackoverflow.com/questions/63553845/pandas-read-json-valueerror-protocol-not-known
+        except ValueError:
+            self.logger.error("Error when loading json file.")
+            return
         actions = [
             {
                 "_index": self.config.elastic_index,
