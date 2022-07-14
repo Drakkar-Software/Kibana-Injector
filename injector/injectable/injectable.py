@@ -34,7 +34,8 @@ class Injectable(abc.ABC):
         self.inject_impl()
 
     def bulk_inserts(self, actions: list):
-        if len(actions) >= 100:
-            deque(parallel_bulk(self.config.elastic_search, actions, thread_count=1), maxlen=0)
-        else:
-            bulk(self.config.elastic_search, actions)
+        bulk(self.config.elastic_search, actions)
+#         if len(actions) >= 100:
+#             deque(parallel_bulk(self.config.elastic_search, actions, thread_count=1), maxlen=0)
+#         else:
+#             bulk(self.config.elastic_search, actions)
